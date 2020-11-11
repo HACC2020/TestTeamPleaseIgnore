@@ -52,9 +52,15 @@ public class CovidBot {
 				vettedTopics.add(potentialTopic);
 			}
 		}
-		// If no topics remain after vetting, use the original topic list.
+		// If no topics remain after vetting, use the original topic list. 
 		if (vettedTopics.size() > 0) {
 			potentialTopics = vettedTopics;
+		}
+		//remember now which topics have already been discussed in this chat. Prefer not to show them when ambiguity arises.
+		for (Topic potentialTopic : potentialTopics) {
+			if(!coveredTopics.contains(potentialTopic)) {
+				coveredTopics.add(potentialTopic);
+			}
 		}
 		//If no topics have been found, check if the user is simply asking for help. Otherwise, dump information.
 		if (potentialTopics.size() == 0) {
